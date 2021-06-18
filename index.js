@@ -89,3 +89,32 @@ function equals(){
       completedOperation = true;
       secondNumber = firstNumber;
 }
+
+$(".curr").click(function(){
+    document.getElementById("dates").innerHTML = "";
+    let innerText = $(this).text();
+    $("#dropdownMenuButton1").text(innerText);
+    $("#dropdownMenuButton1").val(innerText);
+    $("#dropdownMenuButton2").attr("disabled", false);
+    let curr = innerText.substr(0, 3);
+
+    $.ajax({
+        type: "GET",
+        url: "/valutebi.json",
+        data: { curr },
+        dataType: "json",
+        success: function (data) {
+            let array = data[curr].length;
+            console.log(data[curr]);
+            for(let i = array - 8; i < array; i++){
+                document.getElementById("dates").innerHTML += `<li><a id=date${i} class="dropdown-item date" href="#">${JSON.stringify(data[curr][i])}</a></li>`;
+            }
+        }
+    });
+});
+
+$("#dates").on("click", ".date", function(){
+    let innerText = $(this).text();
+    $("#dropdownMenuButton2").text(innerText);
+    $("#dropdownMenuButton2").val(innerText);
+});
