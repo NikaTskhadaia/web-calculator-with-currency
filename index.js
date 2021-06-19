@@ -107,7 +107,7 @@ $("#currencies").on("click", ".curr", function(){
 
     $.ajax({
         type: "GET",
-        url: "./valutebi.json",
+        url: "valutebi.json",
         dataType: "json",
         success: function (data) {
             console.log('data:', data);
@@ -140,7 +140,7 @@ $("#dates").on("click", ".date", function(){
 window.onload = function(){
     $.ajax({
         type: "GET",
-        url: "/currencies.json",
+        url: "currencies.json",
         dataType: "json",
         success: function (data) {
             for(let i = 0; i < data.length; i++){
