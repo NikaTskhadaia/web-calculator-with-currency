@@ -11,10 +11,11 @@
 <body>
 	<div id="main" class="bg-light">
 
-		<div id="curr-screen">
-			<p id="currency">
-
-			</p>
+		<div class="input-group input-group-sm mb-3 mt-2 row">
+			<div class="input-group-prepend col-4 offset-md-6">
+			  <span class="input-group-text" id="inputGroup-sizing-sm">Exchange Rate GEL:</span>
+			</div>
+			<input type="text" id="currency" class="form-control text-end fs-6" aria-label="Small" aria-describedby="inputGroup-sizing-sm" readonly>
 		</div>
 
 		<div id="screen" class="w-100 border border-dark">
@@ -22,9 +23,11 @@
 			<label id="lbl" class="bg-light  w-100 fs-2 text-end d-block h-75 fw-bold">0</label>
 		</div>
 		
-		<div class="clears d-flex flex-row-reverse m-2">			
-			<button id="backspace" class="btn btn-primary border ms-2">←</button>
-			<button id="clear" class="btn btn-primary border">c</button>
+		<div class="clears d-flex flex-row-reverse m-3 justify-content-between">
+			<div class="clears d-flex flex-row-reverse ">
+				<button id="backspace" class="btn btn-primary border ms-2">←</button>
+				<button id="clear" class="btn btn-primary border">c</button>
+			</div>
 		</div>
 
 		<div class="buttons">
@@ -52,7 +55,7 @@
 			
 		<div class="d-flex m-2">
 			<button class="btn btn-light btn-outline-primary dropdown-toggle me-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-				ვალუტები
+				Currencies
 			</button>
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 			  <li><a id="eur" class="dropdown-item curr" href="#">EUR - Euro</a></li>
@@ -61,7 +64,7 @@
 			</ul>
 
 			<button class="btn btn-light btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" disabled>
-				თარიღები
+				Dates
 			</button>
 			<ul id="dates" class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
 			</ul>

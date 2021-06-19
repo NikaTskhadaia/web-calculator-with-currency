@@ -19,3 +19,8 @@ body
 	outline: none;
 	box-shadow: none;
   }
+
+#currency:focus {
+	outline: none;
+	box-shadow: none;
+  }

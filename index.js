@@ -2,6 +2,7 @@ let firstNumber = 0;
 let secondNumber = 0;
 let operationType = "";
 let completedOperation = false;
+let array = [];
 
 $('.number').on('click', function(e){
     let screenText = document.getElementById('lbl');    
@@ -11,12 +12,18 @@ $('.number').on('click', function(e){
     {
         screenText.innerText = "";
     }
+    if(completedOperation){
+        screenText.innerText = e.target.value;
+        completedOperation = false;
+        return;
+    }
     screenText.innerText += e.target.value;
 });
 
 $('#clear').on('click', function(){
     document.getElementById('smallScreen').innerText = "";
     document.getElementById('lbl').innerText = "0";
+    completedOperation = false;
 });
 
 $('#backspace').on('click', function(){    
@@ -27,6 +34,7 @@ $('#backspace').on('click', function(){
         return;
     }    
     screenText.innerText = screenText.innerText.slice(0, -1);
+    completedOperation = false;
 });
 
 function addNumbers(){
@@ -104,10 +112,12 @@ $(".curr").click(function(){
         data: { curr },
         dataType: "json",
         success: function (data) {
-            let array = data[curr].length;
-            console.log(data[curr]);
-            for(let i = array - 8; i < array; i++){
-                document.getElementById("dates").innerHTML += `<li><a id=date${i} class="dropdown-item date" href="#">${JSON.stringify(data[curr][i])}</a></li>`;
+            console.log('data:', data);
+            array = data[curr];
+            console.log('data[curr]:', data[curr]);
+            for(let i = array.length - 8; i < array.length; i++){
+                let date = new Date(Object.keys(array[i])[0]);
+                document.getElementById("dates").innerHTML += `<li><a id=date${i} class="dropdown-item date" href="#">${date.toDateString()}</a></li>`;
             }
         }
     });
@@ -117,4 +127,13 @@ $("#dates").on("click", ".date", function(){
     let innerText = $(this).text();
     $("#dropdownMenuButton2").text(innerText);
     $("#dropdownMenuButton2").val(innerText);
+
+    for(let i = 0; i < array.length; i++)
+    {
+        let date = new Date(Object.keys(array[i])[0]);
+        console.log(date.toDateString(), innerText);
+        if(date.toDateString() == innerText){
+            $('#currency').val(Object.values(array[i])[0]);
+        }
+    }
 });
