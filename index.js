@@ -98,27 +98,26 @@ function equals(){
       secondNumber = firstNumber;
 }
 
-$(".curr").click(function(){
+$("#currencies").on("click", ".curr", function(){
     document.getElementById("dates").innerHTML = "";
     let innerText = $(this).text();
     $("#dropdownMenuButton1").text(innerText);
     $("#dropdownMenuButton1").val(innerText);
     $("#dropdownMenuButton2").attr("disabled", false);
-    let curr = innerText.substr(0, 3);
 
     $.ajax({
         type: "GET",
         url: "/valutebi.json",
-        data: { curr },
         dataType: "json",
         success: function (data) {
             console.log('data:', data);
-            array = data[curr];
-            console.log('data[curr]:', data[curr]);
+            array = data[innerText];
+            console.log('data[curr]:', data[innerText]);
             for(let i = array.length - 8; i < array.length; i++){
                 let date = new Date(Object.keys(array[i])[0]);
                 document.getElementById("dates").innerHTML += `<li><a id=date${i} class="dropdown-item date" href="#">${date.toDateString()}</a></li>`;
             }
+            $("#dropdownMenuButton2").text("Date");
         }
     });
 });
@@ -137,3 +136,16 @@ $("#dates").on("click", ".date", function(){
         }
     }
 });
+
+window.onload = function(){
+    $.ajax({
+        type: "GET",
+        url: "/currencies.json",
+        dataType: "json",
+        success: function (data) {
+            for(let i = 0; i < data.length; i++){
+                document.getElementById("currencies").innerHTML += `<li><a id=${data[i]} class="dropdown-item curr" href="#">${data[i]}</a></li>`
+            }
+        }
+    });
+}
