@@ -107,7 +107,7 @@ $("#currencies").on("click", ".curr", function(){
 
     $.ajax({
         type: "GET",
-        url: "/valutebi.json",
+        url: "./valutebi.json",
         dataType: "json",
         success: function (data) {
             console.log('data:', data);
